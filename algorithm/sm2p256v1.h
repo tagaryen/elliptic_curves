@@ -5,6 +5,7 @@
 #include "sm3.h"
 
 // sm2 crypto
+void sm2p256v1_init();
 void sm2p256v1_key_gen(EcPrivateKey *sk, EcPublicKey *pk);
 void sm2p256v1_encrypt(const EcPublicKey *pk, const uint8_t *msg, const size_t msg_len, const int mode, uint8_t **out, size_t *out_len);
 int sm2p256v1_decrypt(const EcPrivateKey *sk, const uint8_t *cipher, const size_t cipher_len, const int mode, uint8_t **out, size_t *out_len);

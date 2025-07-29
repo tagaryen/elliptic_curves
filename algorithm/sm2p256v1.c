@@ -4,7 +4,6 @@ typedef struct sm2p256v1_curve {
     mpz_t p, a, b, gx, gy, n;
 } sm2p256v1_curve;
 
-static pthread_mutex_t _sm2p256v1_lock = PTHREAD_MUTEX_INITIALIZER;
 static sm2p256v1_curve *_sm2p256v1 = NULL;
 
 // userId = "1234567812345678"
@@ -91,19 +90,15 @@ static void kdf(uint8_t *c1x, size_t x_l, uint8_t *c1y, size_t y_l, uint8_t *c2,
     free(in);
 }
 
-static void sm2p256v1_init() {
+void sm2p256v1_init() {
     if(!_sm2p256v1) {
-        pthread_mutex_lock(&_sm2p256v1_lock);
-        if(!_sm2p256v1) {
-            _sm2p256v1 = (sm2p256v1_curve *)malloc(sizeof(sm2p256v1_curve));
-            mpz_init_set_str(_sm2p256v1->p, "fffffffeffffffffffffffffffffffffffffffff00000000ffffffffffffffff", 16);
-            mpz_init_set_str(_sm2p256v1->a, "fffffffeffffffffffffffffffffffffffffffff00000000fffffffffffffffc", 16);
-            mpz_init_set_str(_sm2p256v1->b, "28e9fa9e9d9f5e344d5a9e4bcf6509a7f39789f515ab8f92ddbcbd414d940e93", 16);
-            mpz_init_set_str(_sm2p256v1->gx, "32c4ae2c1f1981195f9904466a39c9948fe30bbff2660be1715a4589334c74c7", 16);
-            mpz_init_set_str(_sm2p256v1->gy, "bc3736a2f4f6779c59bdcee36b692153d0a9877cc62a474002df32e52139f0a0", 16);
-            mpz_init_set_str(_sm2p256v1->n, "fffffffeffffffffffffffffffffffff7203df6b21c6052b53bbf40939d54123", 16);
-        }
-        pthread_mutex_unlock(&_sm2p256v1_lock);
+        _sm2p256v1 = (sm2p256v1_curve *)malloc(sizeof(sm2p256v1_curve));
+        mpz_init_set_str(_sm2p256v1->p, "fffffffeffffffffffffffffffffffffffffffff00000000ffffffffffffffff", 16);
+        mpz_init_set_str(_sm2p256v1->a, "fffffffeffffffffffffffffffffffffffffffff00000000fffffffffffffffc", 16);
+        mpz_init_set_str(_sm2p256v1->b, "28e9fa9e9d9f5e344d5a9e4bcf6509a7f39789f515ab8f92ddbcbd414d940e93", 16);
+        mpz_init_set_str(_sm2p256v1->gx, "32c4ae2c1f1981195f9904466a39c9948fe30bbff2660be1715a4589334c74c7", 16);
+        mpz_init_set_str(_sm2p256v1->gy, "bc3736a2f4f6779c59bdcee36b692153d0a9877cc62a474002df32e52139f0a0", 16);
+        mpz_init_set_str(_sm2p256v1->n, "fffffffeffffffffffffffffffffffff7203df6b21c6052b53bbf40939d54123", 16);
     }
 }
 

@@ -193,10 +193,10 @@ void paillierTest() {
 int main() {
 
     // sm2Test();
-    secTest();
+    // secTest();
     // sm4Test();
 
-    // sm2CostTest();
+    sm2CostTest();
 
     // sm2CryptoTest();
 

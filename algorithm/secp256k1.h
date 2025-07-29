@@ -5,6 +5,7 @@
 #include "keccak256.h"
 
 // secp256k1 algorithm
+void secp256k1_init();
 void secp256k1_key_gen(EcPrivateKey *sk, EcPublicKey *pk);
 void secp256k1_privateKey_to_publicKey(const EcPrivateKey *sk, EcPublicKey *pk);
 void secp256k1_sign(const EcPrivateKey *sk, const uint8_t *msg, const size_t msg_len, EcSignature *sig, int *recv_id);

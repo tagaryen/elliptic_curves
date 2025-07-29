@@ -5,7 +5,6 @@
 #include <gmp.h>
 #include <string.h>
 #include <stdint.h>
-#include <pthread.h>
 
 #define SM2_C1C2C3 16
 #define SM2_C1C3C2 64
@@ -39,6 +38,10 @@ typedef struct PaillierPublicKey {
 } PaillierPublicKey;
 
 // secp256k1 sign algorithm
+/**
+ * secp256k1 algorithm initialize.
+*/
+void secp256k1_init();
 /**
  * @return EcPrivateKey, EcPublicKey
 */
@@ -74,6 +77,10 @@ void secp256k1_recover_publicKey(const EcSignature *sig, const uint8_t *msg, con
 
 
 // sm2 crypto
+/**
+ * sm2p256v1 algorithm initialize.
+*/
+void sm2p256v1_init();
 /**
  * @return EcPrivateKey, EcPublicKey
 */
